@@ -3,7 +3,14 @@ var routes = function(passport) {
   var express = require('express');
   var Twitter = require("twitter");
   var router = express.Router();
+  var mongoose = require('mongoose');
+  var House = require('../app/models/house');
 
+  var house1 = new House({
+    location: 'Fremont'
+  })
+  house1.save();
+  
   function twitterClient(user) {
     return new Twitter({
       consumer_key: process.env.CONSUMER_KEY,
@@ -12,6 +19,13 @@ var routes = function(passport) {
       access_token_secret: user && user.twitter.tokenSecret
     });
   };
+
+  // user1.save();
+
+  // var user1 = new User({name: 'from Mongoos'});
+  // var house1 = new House({location: 'Fremont'});
+  // house1.save;
+
 
   router.get("/", function(req, res) {
     res.render("index", { user: req.user, title: 'Griftr' });
