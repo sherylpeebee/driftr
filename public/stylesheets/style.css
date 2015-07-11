@@ -12,3 +12,11 @@
 .icon-block .material-icons {
 	font-size: inherit;
 }
+.img {
+  border-bottom: 10px solid azure;
+
+}
+
+#intro {
+  /*display: none;*/
+}
