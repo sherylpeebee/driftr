@@ -21,10 +21,17 @@
   z-index: -1;
 }
 div#find-peace {
-  margin-top: -220px;
-  visibility: hidden;
+  margin-top: -421px;
+  display: none;
+  color: black;
 }
-div#find-place {
+/*div#find-place {
   margin-top: -100px;
-  visibility: hidden;
+  display: none;
+}*/
+
+div#find-place {
+  margin-top: -300px;
+  display: none;
+  color: azure;
 }

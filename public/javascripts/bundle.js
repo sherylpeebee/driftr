@@ -13,12 +13,15 @@ app.run(function(){
 
     function animateIntro (){
         $("#intro").addClass("animated bounceInRight").one(animationEnd, function(){
+          //need to adjust times of these. too fast. kind funky looking
           $(this).removeClass("animated bounceInRight").addClass("animated slideOutUp").one(animationEnd, function(){
-            $("#right-banner").animate({ top: -126 });
+            $("#right-banner").animate({ top: -126 }, function(){
+              $(".find").fadeIn();
+              console.log("hey");
+            });
           });
         });
-      // $("#intro").textillate({ in: {effect: "rollIn"} , out: {effect: "rollOut"} });
-      // cb();
+
     }
       animateIntro();
 
