@@ -15,13 +15,19 @@
   <nav class="light-blue lighten-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">Navbar Link</a></li>
+        <% if (user) { %>
+          <li><a target="_self" href="/auth/logout"><i class="glyphicon glyphicon-home">&nbsp;Logout</i></a></li>
+        <% } else { %>
+          <li><a target="_self" href="/auth/twitter"><i class="glyphicon glyphicon-home">&nbsp;Login</i></a></li>
+        <% } %>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Navbar Lin</a></li>
-        <li><a target="_self" href="/auth/logout">Logout</a></li>
-        <li><a target="_self" href="/auth/twitter">Login</a></li>
+        <% if (user) { %>
+          <li><a target="_self" href="/auth/logout"><i class="glyphicon glyphicon-home">&nbsp;Logout</i></a></li>
+        <% } else { %>
+          <li><a target="_self" href="/auth/twitter"><i class="glyphicon glyphicon-home">&nbsp;Login</i></a></li>
+        <% } %>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
@@ -30,7 +36,7 @@
 
 
   <h1><%= title %></h1>
-    <p>Welcome toooooo <%= title %></p>
+    <p>Welcome to <%= title %></p>
     <br>
 
 
