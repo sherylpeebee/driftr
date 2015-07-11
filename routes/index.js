@@ -9,8 +9,9 @@ var routes = function(passport) {
   var house1 = new House({
     location: 'Fremont'
   })
+
   house1.save();
-  
+
   function twitterClient(user) {
     return new Twitter({
       consumer_key: process.env.CONSUMER_KEY,
