@@ -1,11 +1,3 @@
-'use strict()';
-
-var app = angular.module('GriftrApp', ['ui.router']);
-
-app.run(function(){
-  console.log('Griftr Online');
-});
-
 angular.module('GriftrApp')
 .controller("HomeCtrl", function(){
   console.log("HOME CONTROLLLLLL!!!");
@@ -32,19 +24,4 @@ angular.module('GriftrApp')
       $("#intro").css("display", "none");
     }
   });
-});
-
-'use strict()';
-
-angular.module('GriftrApp')
-.config(function($stateProvider, $urlRouterProvider){
-
-  $urlRouterProvider.otherwise('/');
-
-  $stateProvider
-  .state('home', {url: '/', templateUrl: '/templates/home.html', controller: "HomeCtrl"})
-  .state('info', {url: '/info', templateUrl: '/templates/info.html'});
-})
-.constant('urls',{
-  'apiUrl': ''
 });
