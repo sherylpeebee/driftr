@@ -33,7 +33,12 @@ var routes = function(passport) {
   });
 
   router.get('/houses', function(req, res) {
-    res.json({message: 'house data'});
+    House.find(function(err, houses) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(houses);
+    })
   });
 
   router.post('/houses', function(req, res) {
