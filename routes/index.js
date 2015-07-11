@@ -32,46 +32,8 @@ var routes = function(passport) {
     });
   });
 
-  router.post('/search', function(req, res, next) {
-    var client = twitterClient(req.user);
-    var words = req.body.words.toLowerCase().split(" ");
-    console.log(words);
 
-    client.get('search/tweets', { q: words.join(" OR "), count: 100 }, function(error, tweets, response){
-      if (error) {
-        console.error(error);
-        res.status(500);
-        return;
-      }
-      var stats = {}, oneTweetWords, lowerCaseWord, users = {};
-      tweets.statuses.forEach(function(tweet) {
-        oneTweetWords = tweet.text.toLowerCase().split(" ");
-        oneTweetWords.forEach(function(word) {
-          lowerCaseWord = word.toLowerCase();
-          if (words.indexOf(lowerCaseWord) >= 0) {
-            stats[word] = stats[word] || 0;
-            stats[word]++;
-            var ratio = tweet.user.friends_count/tweet.user.followers_count;
-            tweet.user.ratio = ratio > 1 ? 1.0/ratio : ratio;
-            users[tweet.user.screen_name] = tweet.user;
-          }
-        });
-      });
-      res.json({ stats: stats, users: users, isLoggedIn: !!req.user });
-    });
-  });
 
-  router.post('/follow', function(req, res, next) {
-    var client = twitterClient(req.user);
-    client.post('friendships/create', { screen_name: req.body.screen_name }, function(error, user, response){
-      if (error) {
-        console.error(error);
-        res.status(500);
-        return;
-      }
-      res.json(user);
-    });
-  });
 
   router.get("/auth/logout", function(req, res) {
     req.logout();
