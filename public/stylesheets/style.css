@@ -14,9 +14,24 @@
 }
 .img {
   border-bottom: 10px solid azure;
-
 }
 
-#intro {
-  /*display: none;*/
+#right-banner {
+  position: relative;
+  z-index: -1;
+}
+div#find-peace {
+  margin-top: -421px;
+  display: none;
+  color: black;
+}
+/*div#find-place {
+  margin-top: -100px;
+  display: none;
+}*/
+
+div#find-place {
+  margin-top: -300px;
+  display: none;
+  color: azure;
 }
