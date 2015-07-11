@@ -13,6 +13,10 @@ var routes = function(passport) {
     });
   };
 
+  router.get("/", function(req, res) {
+    res.render("index", { user: req.user, title: 'Griftr' });
+  });
+
   router.get('/auth/twitter', passport.authenticate('twitter'));
 
   router.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/' }), function(req, res) {
@@ -32,17 +36,11 @@ var routes = function(passport) {
     });
   });
 
-
-
-
   router.get("/auth/logout", function(req, res) {
     req.logout();
     res.redirect("/");
   });
 
-  router.get("/*", function(req, res) {
-    res.render("index", { user: req.user });
-  });
 
   return router;
 }
