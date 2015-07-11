@@ -6,12 +6,6 @@ var routes = function(passport) {
   var mongoose = require('mongoose');
   var House = require('../app/models/house');
 
-  var house1 = new House({
-    location: 'Fremont'
-  })
-
-  house1.save();
-
   function twitterClient(user) {
     return new Twitter({
       consumer_key: process.env.CONSUMER_KEY,
@@ -37,6 +31,32 @@ var routes = function(passport) {
   router.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/' }), function(req, res) {
     res.redirect('/');
   });
+
+  router.get('/houses', function(req, res) {
+    res.json({message: 'house data'});
+  });
+
+  router.post('/houses', function(req, res) {
+
+    var house = new House({
+      location: req.body.location,
+      bedrooms: req.body.bedrooms,
+      bathrooms: req.body.bathrooms,
+      petsAllowed: req.body.petsAllowed,
+      startDate: Date.now(),
+      endDate: Date.now()
+    });
+
+    house.save(function(err, savedHouse) {
+      if (err) {
+        console.log(err);
+        res.status(400).json({ error: "Validation Failed" });
+      }
+      console.log("House Saved:", savedHouse);
+      res.json(savedHouse);
+    }); 
+  });
+
 
   router.post('/tweet', function(req, res, next) {
 
