@@ -79,8 +79,6 @@ var routes = function(passport) {
         }        
       }
 
-    };
-
       user.save(function(){
         res.json(user);
       });
