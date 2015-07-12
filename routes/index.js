@@ -21,25 +21,6 @@ var routes = function(passport) {
     res.render("index", { user: req.user, title: 'Griftr' });
   });
 
-    //
-    // var houseSchema = mongoose.Schema({
-    //   location: String,
-    //   bedrooms: Number,
-    //   bathrooms: Number,
-    //   petsAllowed: Boolean,
-    //   startDate: Date,
-    //   endDate: Date
-    // });
-    // mongoose.model('House', houseSchema);
-
-
-    // var Person = mongoose.model('Person', yourSchema);
-    // // find each person with a last name matching 'Ghost', selecting the `name` and `occupation` fields
-    // Person.findOne({ 'name.last': 'Ghost' }, 'name occupation', function (err, person) {
-    //   if (err) return handleError(err);
-    //   console.log('%s %s is a %s.', person.name.first, person.name.last, person.occupation) // Space Ghost is a talk show host.
-    // });
-
   router.get('/auth/twitter', passport.authenticate('twitter'));
 
   router.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/' }), function(req, res) {
@@ -50,36 +31,14 @@ var routes = function(passport) {
     res.json(req.user);
   });
 
-  // var houseSchema = mongoose.Schema({
-  //   location: String,
-  //   bedrooms: Number,
-  //   bathrooms: Number,
-  //   petsAllowed: Boolean,
-  //   startDate: Date,
-  //   endDate: Date
-  // });
-  // mongoose.model('House', houseSchema);
-  // var userInfo = mongoose.schema({
-  //
-  // });
 
   router.post('/test', function() {
     res.send("ok").status(200);
-  })
+  });
 
   router.post('/userinfo', function(req, res) {
     console.log("~~~~~~~~~~~~~~~~~~~~!!BODYBODYBODY!!~~~~~~~~~~~~~~~~~~~~~");
-<<<<<<< HEAD
 
-    User.findOneAndUpdate({ "twitter.username": req.body.twitter.username }, req.body.owner, { new: true }, function(err, updatedUser) {
-      console.log(err, updatedUser);
-      if (err) {
-        console.log(err);
-        res.status(400).json({ error: "Could not read user data" });
-      }
-      if (!updatedUser) {
-        res.status(404);
-=======
     console.log(req.body);
 
     User.findOne({'twitter.username': req.body.twitter.username}, function(err, user){
@@ -97,36 +56,22 @@ var routes = function(passport) {
           updates: req.body.owner.updates,
           smoking: req.body.owner.smoking,
           other: req.body.owner.other
-        }
->>>>>>> daf840b1cb072454e75b7b765f2003207cb58456
+
       }
 
-<<<<<<< HEAD
-    // res.status(200).send("ok");
-=======
+    };
 
-
+      user.save(function(){
+        res.json(user);
+      });
 
 
       user.save(function(){
-        res.json(user)
+        res.json(user);
       });
 
-    })
-    // User.findOneAndUpdate({ 'twitter.username': req.body.username }, req.body, { new: true }, function(err, updatedUser) {
-    //   console.log(err, updatedUser);
-    //   if (err) {
-    //     console.log(err);
-    //     res.status(400).json({ error: "Could not read user data" });
-    //   }
-    //   if (!updatedUser) {
-    //     res.status(404);
-    //   }
-    //   res.json(updatedUser);
-    // });
+    });
 
-
->>>>>>> daf840b1cb072454e75b7b765f2003207cb58456
   });
 
   router.get('/houses', function(req, res) {
