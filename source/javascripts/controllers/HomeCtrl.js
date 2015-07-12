@@ -16,7 +16,6 @@ angular.module('GriftrApp')
             });
           });
         });
-
     }
       animateIntro();
 

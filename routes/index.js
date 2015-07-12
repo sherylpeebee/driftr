@@ -24,7 +24,6 @@ var routes = function(passport) {
 var loggedIn;
   router.get("/", function(req, res) {
     res.render("index", { user: req.user, title: 'Griftr' });
-    loggedIn = req.user;
   });
 
     //
@@ -51,6 +50,17 @@ var loggedIn;
   router.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/' }), function(req, res) {
     res.redirect('/');
   });
+
+
+  
+
+  router.post('/user', function(req, res) {
+
+  });
+
+
+
+
 
   router.get('/houses', function(req, res) {
     House.find(function(err, houses) {
@@ -108,7 +118,7 @@ var loggedIn;
   router.get("/getUserData", function(req, res) {
     res.json(req.user);
   });
-  
+
   router.get("/auth/logout", function(req, res) {
     req.logout();
     res.redirect("/");

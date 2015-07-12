@@ -6,6 +6,23 @@ app.run(function(){
   console.log('Griftr Online');
 });
 
+'use strict()';
+
+angular.module('GriftrApp')
+.config(function($stateProvider, $urlRouterProvider){
+
+  $urlRouterProvider.otherwise('/');
+
+  $stateProvider
+  .state('home', {url: '/', templateUrl: '/templates/home.html', controller: "HomeCtrl"})
+  .state('info', {url: '', templateUrl: '/templates/info.html', abstract: true})
+  .state('info.owner', {url: '/owner', templateUrl: '/templates/owner.html', controller: "InfoCtrl"})
+  .state('info.traveller', {url: '/traveller', templateUrl: '/templates/traveller.html', controller: "InfoCtrl"});
+})
+.constant('urls',{
+  'apiUrl': ''
+});
+
 angular.module('GriftrApp')
 .controller("HomeCtrl", function(){
   console.log("HOME CONTROLLLLLL!!!");
@@ -24,7 +41,6 @@ angular.module('GriftrApp')
             });
           });
         });
-
     }
       animateIntro();
 
@@ -35,38 +51,23 @@ angular.module('GriftrApp')
 });
 
 angular.module('GriftrApp')
-.controller("InfoCtrl", function(){
-  console.log("info CONTROLLLLLL!!!");
-
+.controller("InfoCtrl", function($scope){
+  console.log("info here!!!");
+  $scope.test = 43;
+$scope.submitInfo = function(user){
+  user.firstName = $rootScope.currentUser.twitter.displayName;
+  
+  // $http.post("/")
+};
 });
 
 'use strict()';
 
 angular.module('GriftrApp')
-.config(function($stateProvider, $urlRouterProvider){
-
-  $urlRouterProvider.otherwise('/');
-
-  $stateProvider
-  .state('home', {url: '/', templateUrl: '/templates/home.html', controller: "HomeCtrl"})
-  .state('info', {url: '/info', templateUrl: '/templates/info.html', controller: "InfoCtrl"});
-})
-.constant('urls',{
-  'apiUrl': ''
-});
-
-angular.module('GriftrApp')
-.controller("InfoCtrl", function(){
-  console.log("info n stuffs");
-});
-
-'use strict()';
-
-angular.module('GriftrApp')
-.controller('NavCtrl', function($scope, $http) {
+.controller('NavCtrl', function($scope, $http, $rootScope) {
   console.log('nav ctrl');
   $http.get("/getUserData").success(function(userData){
     console.log(userData);
-    $scope.currentUser = userData;
+    $rootScope.currentUser = userData;
   });
 });
