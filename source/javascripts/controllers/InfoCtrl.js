@@ -13,6 +13,7 @@ console.log("get dat info");
       currentUser.userType = 'owner';      
       currentUser.owner = user;
       console.log(currentUser);
+
       $http.post("/userinfo", currentUser).success(function(data, status){
         console.log(data);
       }).catch(function(err){

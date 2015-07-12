@@ -3,7 +3,11 @@
 <div class="row">
     <form class="col s12" ng-submit="submitInfo(user)" >
       <div class="row">
-        <div class="input-field col s12">
+        <div class="input-field col s6">
+          <input id="firstName" type="text" class="validate" ng-model="user.firstName" required="true" />
+          <label for="firstName">First Name</label>
+        </div>
+        <div class="input-field col s6">
           <input id="lastName" type="text" class="validate" ng-model="user.lastName" required="true" />
           <label for="lastName">Last Name</label>
         </div>

@@ -29,13 +29,13 @@ img {
 }*/
 div#find-peace {
   margin-top: -300px;
-  /*display: none;*/
+  display: none;
   color: black;
 }
 
 div#find-place {
   margin-top: -300px;
-  /*display: none;*/
+  display: none;
   color: azure;
 }
 
