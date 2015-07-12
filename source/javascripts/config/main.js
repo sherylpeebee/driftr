@@ -7,7 +7,7 @@ angular.module('GriftrApp')
 
   $stateProvider
   .state('home', {url: '/', templateUrl: '/templates/home.html', controller: "HomeCtrl"})
-  .state('info', {url: '/info', templateUrl: '/templates/info.html'});
+  .state('info', {url: '/info', templateUrl: '/templates/info.html', controller: "InfoCtrl"});
 })
 .constant('urls',{
   'apiUrl': ''
