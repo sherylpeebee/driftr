@@ -12,25 +12,33 @@
 .icon-block .material-icons {
 	font-size: inherit;
 }
-.img {
+img {
   border-bottom: 10px solid azure;
+  line-height: 10px;
+  display: block !important;
 }
 
-#right-banner {
+.intro {
+  /*position: relative;*/
+  /*margin-bottom: 100px;*/
+}
+
+/*#right-banner {
   position: relative;
   z-index: -1;
-}
+}*/
 div#find-peace {
-  margin-top: -421px;
-  display: none;
+  margin-top: -300px;
+  /*display: none;*/
   color: black;
 }
 
 div#find-place {
   margin-top: -300px;
-  display: none;
+  /*display: none;*/
   color: azure;
 }
+
 
 .find {
   -webkit-animation-duration: 1s;
