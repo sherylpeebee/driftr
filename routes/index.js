@@ -63,25 +63,54 @@ var routes = function(passport) {
   //
   // });
 
-  router.post('/userInfo', function(req, res) {
+  router.post('/test', function() {
+    res.send("ok").status(200);
+  })
+
+  router.post('/userinfo', function(req, res) {
     console.log("~~~~~~~~~~~~~~~~~~~~!!BODYBODYBODY!!~~~~~~~~~~~~~~~~~~~~~");
-    var userInfo = req.body;
-    console.log(req.body.username);
-    User.findOneAndUpdate({ 'twitter.username': req.body.username }, req.body, { new: true }, function(err, updatedUser) {
-      console.log(err, updatedUser);
-      if (err) {
-        console.log(err);
-        res.status(400).json({ error: "Could not read user data" });
+    console.log(req.body);
+
+    User.findOne({'twitter.username': req.body.twitter.username}, function(err, user){
+      console.log('user: ', user);
+      if (err) { res.status(400).json('shorry bro'); }
+      user.owner = {
+        lastName: req.body.owner.lastName,
+        email: req.body.owner.email,
+        image: req.body.owner.image,
+        startDate: req.body.owner.startDate,
+        endDate: req.body.owner.endDate,
+        info: {
+          pets: req.body.owner.pets,
+          plants: req.body.owner.plants,
+          updates: req.body.owner.updates,
+          smoking: req.body.owner.smoking,
+          other: req.body.owner.other
+        }
       }
-      if (!updatedUser) {
-        res.status(404);
-      }
-      res.json(updatedUser);
-    });
 
 
 
-    // res.status(200).send("ok");
+
+
+      user.save(function(){
+        res.json(user)
+      });
+
+    })
+    // User.findOneAndUpdate({ 'twitter.username': req.body.username }, req.body, { new: true }, function(err, updatedUser) {
+    //   console.log(err, updatedUser);
+    //   if (err) {
+    //     console.log(err);
+    //     res.status(400).json({ error: "Could not read user data" });
+    //   }
+    //   if (!updatedUser) {
+    //     res.status(404);
+    //   }
+    //   res.json(updatedUser);
+    // });
+
+
   });
 
 
