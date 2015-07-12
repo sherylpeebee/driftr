@@ -66,8 +66,6 @@ var routes = function(passport) {
   router.post('/userInfo', function(req, res) {
     console.log("~~~~~~~~~~~~~~~~~~~~!!BODYBODYBODY!!~~~~~~~~~~~~~~~~~~~~~");
 
-    // var userInfo = req.body;
-
     User.findOneAndUpdate({ "twitter.username": req.body.twitter.username }, req.body.owner, { new: true }, function(err, updatedUser) {
       console.log(err, updatedUser);
       if (err) {
@@ -82,10 +80,6 @@ var routes = function(passport) {
 
     // res.status(200).send("ok");
   });
-
-
-
-
 
   router.get('/houses', function(req, res) {
     House.find(function(err, houses) {

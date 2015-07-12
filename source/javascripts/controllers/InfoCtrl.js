@@ -17,7 +17,7 @@ console.log("get dat info");
       currentUser.owner.firstName = firstName;
       console.log(currentUser);
       $http.post("/userInfo", currentUser).success(function(data, status){
-        console.log(data);
+        console.log("done");
       }).catch(function(err){
         console.log(err);
       });
@@ -27,7 +27,7 @@ console.log("get dat info");
       user.firstName = firstName;
       console.log(user);
       $http.post("/userInfo", user).success(function(data, status){
-        console.log(data);
+        console.log("done");
       }).catch(function(err){
         console.log(err);
       });

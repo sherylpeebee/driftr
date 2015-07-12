@@ -6,23 +6,6 @@ app.run(function(){
   console.log('Griftr Online');
 });
 
-'use strict()';
-
-angular.module('GriftrApp')
-.config(function($stateProvider, $urlRouterProvider){
-
-  $urlRouterProvider.otherwise('/');
-
-  $stateProvider
-  .state('home', {url: '/', templateUrl: '/templates/home.html', controller: "HomeCtrl"})
-  .state('info', {url: '', templateUrl: '/templates/info.html', abstract: true})
-  .state('info.owner', {url: '/owner', templateUrl: '/templates/owner.html', controller: "InfoCtrl"})
-  .state('info.traveller', {url: '/traveller', templateUrl: '/templates/traveller.html', controller: "InfoCtrl"});
-})
-.constant('urls',{
-  'apiUrl': ''
-});
-
 angular.module('GriftrApp')
 .controller("HomeCtrl", function(){
   console.log("HOME CONTROLLLLLL!!!");
@@ -80,7 +63,7 @@ console.log("get dat info");
       currentUser.owner.firstName = firstName;
       console.log(currentUser);
       $http.post("/userInfo", currentUser).success(function(data, status){
-        console.log(data);
+        console.log("done");
       }).catch(function(err){
         console.log(err);
       });
@@ -90,7 +73,7 @@ console.log("get dat info");
       user.firstName = firstName;
       console.log(user);
       $http.post("/userInfo", user).success(function(data, status){
-        console.log(data);
+        console.log("done");
       }).catch(function(err){
         console.log(err);
       });
@@ -107,4 +90,21 @@ angular.module('GriftrApp')
     console.log(userData);
     $rootScope.currentUser = userData;
   });
+});
+
+'use strict()';
+
+angular.module('GriftrApp')
+.config(function($stateProvider, $urlRouterProvider){
+
+  $urlRouterProvider.otherwise('/');
+
+  $stateProvider
+  .state('home', {url: '/', templateUrl: '/templates/home.html', controller: "HomeCtrl"})
+  .state('info', {url: '', templateUrl: '/templates/info.html', abstract: true})
+  .state('info.owner', {url: '/owner', templateUrl: '/templates/owner.html', controller: "InfoCtrl"})
+  .state('info.traveller', {url: '/traveller', templateUrl: '/templates/traveller.html', controller: "InfoCtrl"});
+})
+.constant('urls',{
+  'apiUrl': ''
 });
