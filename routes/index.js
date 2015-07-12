@@ -71,22 +71,41 @@ var routes = function(passport) {
     console.log("~~~~~~~~~~~~~~~~~~~~!!BODYBODYBODY!!~~~~~~~~~~~~~~~~~~~~~");
     console.log(req.body);
 
+
+
     User.findOne({'twitter.username': req.body.twitter.username}, function(err, user){
       console.log('user: ', user);
       if (err) { res.status(400).json('shorry bro'); }
-      user.owner = {
-        lastName: req.body.owner.lastName,
-        email: req.body.owner.email,
-        image: req.body.owner.image,
-        startDate: req.body.owner.startDate,
-        endDate: req.body.owner.endDate,
-        info: {
-          pets: req.body.owner.pets,
-          plants: req.body.owner.plants,
-          updates: req.body.owner.updates,
-          smoking: req.body.owner.smoking,
-          other: req.body.owner.other
+      if (user.userType === 'owner') {
+        user.owner = {
+          lastName: req.body.owner.lastName,
+          email: req.body.owner.email,
+          image: req.body.owner.image,
+          startDate: req.body.owner.startDate,
+          endDate: req.body.owner.endDate,
+          info: {
+            pets: req.body.owner.pets,
+            plants: req.body.owner.plants,
+            updates: req.body.owner.updates,
+            smoking: req.body.owner.smoking,
+            other: req.body.owner.other
+          }
         }
+      } else {
+        user.traveller = {
+          lastName: req.body.traveller.lastName,
+          email: req.body.traveller.email,
+          image: req.body.traveller.image,
+          startDate: req.body.traveller.startDate,
+          endDate: req.body.traveller.endDate,
+          info: {
+            pets: req.body.traveller.pets,
+            plants: req.body.traveller.plants,
+            updates: req.body.traveller.updates,
+            smoking: req.body.traveller.smoking,
+            other: req.body.traveller.other
+          }
+        }        
       }
 
 
