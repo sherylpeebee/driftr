@@ -1,4 +1,4 @@
-'use strict';
+'use strict()';
 
 angular.module('GriftrApp')
 .controller('NavCtrl', function($scope, $http) {
@@ -6,6 +6,5 @@ angular.module('GriftrApp')
   $http.get("/getUserData").success(function(userData){
     console.log(userData);
     $scope.currentUser = userData;
-  })
+  });
 });
-

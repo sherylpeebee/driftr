@@ -13,7 +13,7 @@ var routes = function(passport) {
       access_token_key: user && user.twitter.token,
       access_token_secret: user && user.twitter.tokenSecret
     });
-  };
+  }
 
   // user1.save();
 
@@ -21,10 +21,30 @@ var routes = function(passport) {
   // var house1 = new House({location: 'Fremont'});
   // house1.save;
 
-
+var loggedIn;
   router.get("/", function(req, res) {
     res.render("index", { user: req.user, title: 'Griftr' });
+    loggedIn = req.user;
   });
+
+    //
+    // var houseSchema = mongoose.Schema({
+    //   location: String,
+    //   bedrooms: Number,
+    //   bathrooms: Number,
+    //   petsAllowed: Boolean,
+    //   startDate: Date,
+    //   endDate: Date
+    // });
+    // mongoose.model('House', houseSchema);
+
+
+    // var Person = mongoose.model('Person', yourSchema);
+    // // find each person with a last name matching 'Ghost', selecting the `name` and `occupation` fields
+    // Person.findOne({ 'name.last': 'Ghost' }, 'name occupation', function (err, person) {
+    //   if (err) return handleError(err);
+    //   console.log('%s %s is a %s.', person.name.first, person.name.last, person.occupation) // Space Ghost is a talk show host.
+    // });
 
   router.get('/auth/twitter', passport.authenticate('twitter'));
 
@@ -38,7 +58,16 @@ var routes = function(passport) {
         res.send(err);
       }
       res.json(houses);
-    })
+    });
+  });
+  router.get('/house/:location', function(req, res) {
+    var location = req.params.location;
+    House.findOne({"location": location},function(err, house) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(house);
+    });
   });
 
   router.post('/houses', function(req, res) {
@@ -59,7 +88,7 @@ var routes = function(passport) {
       }
       console.log("House Saved:", savedHouse);
       res.json(savedHouse);
-    }); 
+    });
   });
 
 
@@ -79,7 +108,7 @@ var routes = function(passport) {
   router.get("/getUserData", function(req, res) {
     res.json(req.user);
   });
-
+  
   router.get("/auth/logout", function(req, res) {
     req.logout();
     res.redirect("/");
@@ -87,6 +116,6 @@ var routes = function(passport) {
 
 
   return router;
-}
+};
 
 module.exports = routes;

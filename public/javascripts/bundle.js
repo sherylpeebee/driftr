@@ -55,7 +55,12 @@ angular.module('GriftrApp')
   'apiUrl': ''
 });
 
-'use strict';
+angular.module('GriftrApp')
+.controller("InfoCtrl", function(){
+  console.log("info n stuffs");
+});
+
+'use strict()';
 
 angular.module('GriftrApp')
 .controller('NavCtrl', function($scope, $http) {
@@ -63,6 +68,5 @@ angular.module('GriftrApp')
   $http.get("/getUserData").success(function(userData){
     console.log(userData);
     $scope.currentUser = userData;
-  })
+  });
 });
-
