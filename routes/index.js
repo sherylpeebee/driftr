@@ -76,6 +76,10 @@ var routes = function(passport) {
     });
   });
 
+  router.get("/getUserData", function(req, res) {
+    res.json(req.user);
+  });
+
   router.get("/auth/logout", function(req, res) {
     req.logout();
     res.redirect("/");

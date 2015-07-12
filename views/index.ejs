@@ -13,11 +13,12 @@
   <link href="stylesheets/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
-  <nav class="light-blue lighten-1" role="navigation">
+  <nav class="light-blue lighten-1" role="navigation" ng-controller="NavCtrl">
 
     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Griftr</a>
       <ul class="right hide-on-med-and-down">
         <% if (user) { %>
+          <li>{{currentUser.twitter.displayName}}</li>
           <li><a target="_self" href="/auth/logout" class="glyphicon glyphicon-home">&nbsp;Logout</a></li>
         <% } else { %>
           <li><a target="_self" href="/auth/twitter" class="glyphicon glyphicon-home">&nbsp;Login</a></li>
@@ -26,6 +27,7 @@
 
       <ul id="nav-mobile" class="side-nav">
         <% if (user) { %>
+          <li>{{currentUser}}</li>
           <li><a target="_self" href="/auth/logout"><i class="glyphicon glyphicon-home">&nbsp;Logout</i></a></li>
         <% } else { %>
           <li><a target="_self" href="/auth/twitter"><i class="glyphicon glyphicon-home">&nbsp;Login</i></a></li>
@@ -62,6 +64,7 @@
     <div class="container">
       <br><br>
       <h1 class="header center orange-text">Griftr</h1>
+
       <div class="row center">
         <ui-view></ui-view>
       </div>
