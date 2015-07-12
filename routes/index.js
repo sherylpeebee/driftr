@@ -15,13 +15,6 @@ var routes = function(passport) {
     });
   }
 
-  // user1.save();
-
-  // var user1 = new User({name: 'from Mongoos'});
-  // var house1 = new House({location: 'Fremont'});
-  // house1.save;
-
-var loggedIn;
   router.get("/", function(req, res) {
     res.render("index", { user: req.user, title: 'Griftr' });
   });
@@ -51,11 +44,29 @@ var loggedIn;
     res.redirect('/');
   });
 
+  router.get("/getUserData", function(req, res) {
+    res.json(req.user);
+  });
 
-  
+  // var houseSchema = mongoose.Schema({
+  //   location: String,
+  //   bedrooms: Number,
+  //   bathrooms: Number,
+  //   petsAllowed: Boolean,
+  //   startDate: Date,
+  //   endDate: Date
+  // });
+  // mongoose.model('House', houseSchema);
+  // var userInfo = mongoose.schema({
+  //
+  // });
 
-  router.post('/user', function(req, res) {
+  router.post('/userInfo', function(req, res) {
+    console.log("~~~~~~~~~~~~~~~~~~~~!!BODYBODYBODY!!~~~~~~~~~~~~~~~~~~~~~");
+    var userInfo = req.body;
+    
 
+    res.status(200).send("ok");
   });
 
 
@@ -91,33 +102,16 @@ var loggedIn;
       endDate: Date.now()
     });
 
-    house.save(function(err, savedHouse) {
-      if (err) {
-        console.log(err);
-        res.status(400).json({ error: "Validation Failed" });
-      }
-      console.log("House Saved:", savedHouse);
-      res.json(savedHouse);
+  house.save(function(err, savedHouse) {
+    if (err) {
+      console.log(err);
+      res.status(400).json({ error: "Validation Failed" });
+    }
+    console.log("House Saved:", savedHouse);
+    res.json(savedHouse);
     });
   });
 
-
-  router.post('/tweet', function(req, res, next) {
-
-    var client = twitterClient(req.user);
-    client.post('statuses/update', { status: req.body.tweet }, function(error, tweets, response){
-      if (error) {
-        console.error(error);
-        res.status(500);
-        return;
-      }
-      res.json(tweets);
-    });
-  });
-
-  router.get("/getUserData", function(req, res) {
-    res.json(req.user);
-  });
 
   router.get("/auth/logout", function(req, res) {
     req.logout();
@@ -125,6 +119,18 @@ var loggedIn;
   });
 
 
+
+  // router.post('/tweet', function(req, res, next) {
+  //   var client = twitterClient(req.user);
+  //   client.post('statuses/update', { status: req.body.tweet }, function(error, tweets, response){
+  //     if (error) {
+  //       console.error(error);
+  //       res.status(500);
+  //       return;
+  //     }
+  //     res.json(tweets);
+  //   });
+  // });
   return router;
 };
 
