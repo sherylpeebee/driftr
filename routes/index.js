@@ -7,6 +7,7 @@ var routes = function(passport) {
   var House = require('../app/models/house');
   var User = require('../app/models/user');
 
+
   function twitterClient(user) {
     return new Twitter({
       consumer_key: process.env.CONSUMER_KEY,
@@ -64,6 +65,7 @@ var routes = function(passport) {
 
   router.post('/userInfo', function(req, res) {
     console.log("~~~~~~~~~~~~~~~~~~~~!!BODYBODYBODY!!~~~~~~~~~~~~~~~~~~~~~");
+
     // var userInfo = req.body;
 
     User.findOneAndUpdate({ "twitter.username": req.body.twitter.username }, req.body.owner, { new: true }, function(err, updatedUser) {
@@ -72,10 +74,13 @@ var routes = function(passport) {
         console.log(err);
         res.status(400).json({ error: "Could not read user data" });
       }
+      if (!updatedUser) {
+        res.status(404);
+      }
       res.json(updatedUser);
-  });
+    });
 
-    res.status(200).send("ok");
+    // res.status(200).send("ok");
   });
 
 
