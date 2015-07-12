@@ -5,6 +5,8 @@ var routes = function(passport) {
   var router = express.Router();
   var mongoose = require('mongoose');
   var House = require('../app/models/house');
+  var User = require('../app/models/user');
+
 
   function twitterClient(user) {
     return new Twitter({
@@ -64,9 +66,22 @@ var routes = function(passport) {
   router.post('/userInfo', function(req, res) {
     console.log("~~~~~~~~~~~~~~~~~~~~!!BODYBODYBODY!!~~~~~~~~~~~~~~~~~~~~~");
     var userInfo = req.body;
-    
+    console.log(req.body.username);
+    User.findOneAndUpdate({ 'twitter.username': req.body.username }, req.body, { new: true }, function(err, updatedUser) {
+      console.log(err, updatedUser);
+      if (err) {
+        console.log(err);
+        res.status(400).json({ error: "Could not read user data" });
+      }
+      if (!updatedUser) {
+        res.status(404);
+      }
+      res.json(updatedUser);
+    });
 
-    res.status(200).send("ok");
+
+
+    // res.status(200).send("ok");
   });
 
 
