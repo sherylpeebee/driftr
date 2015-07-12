@@ -31,3 +31,8 @@ div#find-place {
   display: none;
   color: azure;
 }
+
+.find {
+  -webkit-animation-duration: 1s;
+  cursor: pointer;
+}
