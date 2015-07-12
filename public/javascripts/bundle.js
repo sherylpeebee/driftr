@@ -6,6 +6,23 @@ app.run(function(){
   console.log('Griftr Online');
 });
 
+'use strict()';
+
+angular.module('GriftrApp')
+.config(function($stateProvider, $urlRouterProvider){
+
+  $urlRouterProvider.otherwise('/');
+
+  $stateProvider
+  .state('home', {url: '/', templateUrl: '/templates/home.html', controller: "HomeCtrl"})
+  .state('info', {url: '', templateUrl: '/templates/info.html', abstract: true})
+  .state('info.owner', {url: '/owner', templateUrl: '/templates/owner.html', controller: "InfoCtrl"})
+  .state('info.traveller', {url: '/traveller', templateUrl: '/templates/traveller.html', controller: "InfoCtrl"});
+})
+.constant('urls',{
+  'apiUrl': ''
+});
+
 angular.module('GriftrApp')
 .controller("HomeCtrl", function(){
   console.log("HOME CONTROLLLLLL!!!");
@@ -62,18 +79,29 @@ console.log("get dat info");
       currentUser.owner = user;
       currentUser.owner.firstName = firstName;
       console.log(currentUser);
+<<<<<<< HEAD
       $http.post("/userInfo", currentUser).success(function(data, status){
         console.log("done");
+=======
+      $http.post("/userinfo", currentUser).success(function(data, status){
+        console.log(data);
+>>>>>>> daf840b1cb072454e75b7b765f2003207cb58456
       }).catch(function(err){
         console.log(err);
       });
+
     }
     else if($state.current.name === "info.traveller"){
       $rootScope.currentUser.owner = user;
       user.firstName = firstName;
       console.log(user);
+<<<<<<< HEAD
       $http.post("/userInfo", user).success(function(data, status){
         console.log("done");
+=======
+      $http.post("/userinfo", user).success(function(data, status){
+        console.log(data);
+>>>>>>> daf840b1cb072454e75b7b765f2003207cb58456
       }).catch(function(err){
         console.log(err);
       });
@@ -90,21 +118,4 @@ angular.module('GriftrApp')
     console.log(userData);
     $rootScope.currentUser = userData;
   });
-});
-
-'use strict()';
-
-angular.module('GriftrApp')
-.config(function($stateProvider, $urlRouterProvider){
-
-  $urlRouterProvider.otherwise('/');
-
-  $stateProvider
-  .state('home', {url: '/', templateUrl: '/templates/home.html', controller: "HomeCtrl"})
-  .state('info', {url: '', templateUrl: '/templates/info.html', abstract: true})
-  .state('info.owner', {url: '/owner', templateUrl: '/templates/owner.html', controller: "InfoCtrl"})
-  .state('info.traveller', {url: '/traveller', templateUrl: '/templates/traveller.html', controller: "InfoCtrl"});
-})
-.constant('urls',{
-  'apiUrl': ''
 });
