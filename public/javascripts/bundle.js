@@ -6,6 +6,23 @@ app.run(function(){
   console.log('Griftr Online');
 });
 
+'use strict()';
+
+angular.module('GriftrApp')
+.config(function($stateProvider, $urlRouterProvider){
+
+  $urlRouterProvider.otherwise('/');
+
+  $stateProvider
+  .state('home', {url: '/', templateUrl: '/templates/home.html', controller: "HomeCtrl"})
+  .state('info', {url: '', templateUrl: '/templates/info.html', abstract: true})
+  .state('info.owner', {url: '/owner', templateUrl: '/templates/owner.html', controller: "InfoCtrl"})
+  .state('info.traveller', {url: '/traveller', templateUrl: '/templates/traveller.html', controller: "InfoCtrl"});
+})
+.constant('urls',{
+  'apiUrl': ''
+});
+
 angular.module('GriftrApp')
 .controller("HomeCtrl", function(){
   console.log("HOME CONTROLLLLLL!!!");
@@ -71,11 +88,11 @@ console.log("get dat info");
 
     }
     else if($state.current.name === "info.traveller"){
-      $rootScope.currentUser.owner = user;
+      $rootScope.currentUser.traveller = user;
       user.firstName = firstName;
       console.log(user);
 
-      $http.post("/userinfo", user).success(function(data, status){
+      $http.post("/userInfo", user).success(function(data, status){
         console.log(data);
       }).catch(function(err){
         console.log(err);
@@ -93,21 +110,4 @@ angular.module('GriftrApp')
     console.log(userData);
     $rootScope.currentUser = userData;
   });
-});
-
-'use strict()';
-
-angular.module('GriftrApp')
-.config(function($stateProvider, $urlRouterProvider){
-
-  $urlRouterProvider.otherwise('/');
-
-  $stateProvider
-  .state('home', {url: '/', templateUrl: '/templates/home.html', controller: "HomeCtrl"})
-  .state('info', {url: '', templateUrl: '/templates/info.html', abstract: true})
-  .state('info.owner', {url: '/owner', templateUrl: '/templates/owner.html', controller: "InfoCtrl"})
-  .state('info.traveller', {url: '/traveller', templateUrl: '/templates/traveller.html', controller: "InfoCtrl"});
-})
-.constant('urls',{
-  'apiUrl': ''
 });

@@ -25,11 +25,11 @@ console.log("get dat info");
 
     }
     else if($state.current.name === "info.traveller"){
-      $rootScope.currentUser.owner = user;
+      $rootScope.currentUser.traveller = user;
       user.firstName = firstName;
       console.log(user);
 
-      $http.post("/userinfo", user).success(function(data, status){
+      $http.post("/userInfo", user).success(function(data, status){
         console.log(data);
       }).catch(function(err){
         console.log(err);

@@ -65,11 +65,6 @@ var routes = function(passport) {
         res.json(user);
       });
 
-
-      user.save(function(){
-        res.json(user);
-      });
-
     });
 
   });
