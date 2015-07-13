@@ -29,19 +29,6 @@ angular.module('GriftrApp')
 });
 
 angular.module('GriftrApp')
-.factory("Listing", function($http){
-  function Listing(){};
-  Listing.test = function() {
-    console.log('this is a test');
-    // return 'this is a test';
-  }
-  Listing.getListing = function(houseId){
-    console.log('house: ', houseId);
-    return $http.get("/listing/" + houseId);
-  }
-  return Listing;
-});
-angular.module('GriftrApp')
 .controller("HomeCtrl", function(){
   console.log("HOME CONTROLLLLLL!!!");
 
@@ -188,4 +175,18 @@ angular.module('GriftrApp')
     console.log(userData);
     $rootScope.currentUser = userData;
   });
+});
+
+angular.module('GriftrApp')
+.factory("Listing", function($http){
+  function Listing(){};
+  Listing.test = function() {
+    console.log('this is a test');
+    // return 'this is a test';
+  }
+  Listing.getListing = function(houseId){
+    console.log('house: ', houseId);
+    return $http.get("/listing/" + houseId);
+  }
+  return Listing;
 });

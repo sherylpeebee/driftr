@@ -1,8 +1,9 @@
-<div class="container">
 
+<div class="container">
       <div class="row">
         <h1>HOUSES</h1>
-        <div class="col s4" ng-repeat='house in houses track by $index' >
+<input type="text" name="name" value="" placeholder="Search Homes" ng-model= "search">
+        <div class="col s4" ng-repeat='house in houses | filter:search' >
           <div class="card">
             <div class="card-image">
               <img ng-src="{{house.image}}">
