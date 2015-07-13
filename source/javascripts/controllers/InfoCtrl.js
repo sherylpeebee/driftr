@@ -19,7 +19,7 @@ console.log("get dat info");
       $http.post("/userinfo", currentUser).success(function(data, status){
         console.log(data);
         $scope.user = {};
-        $state.go('travellers');
+        $state.go('ownerProfile');
       }).catch(function(err){
         console.log(err);
       });

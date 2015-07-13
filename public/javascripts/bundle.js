@@ -22,6 +22,7 @@ angular.module('GriftrApp')
   .state('info', {url: '', templateUrl: '/templates/info.html', abstract: true})
   .state('info.owner', {url: '/owner', templateUrl: '/templates/owner.html', controller: "InfoCtrl"})
   .state('info.traveller', {url: '/traveller', templateUrl: '/templates/traveller.html', controller: "InfoCtrl"})
+  .state('ownerProfile', {url: '/ownerProfile', templateUrl: '/templates/ownerProfile.html', controller: "ProfileCtrl"});
 
 })
 .constant('urls',{
@@ -90,7 +91,7 @@ console.log("get dat info");
       $http.post("/userinfo", currentUser).success(function(data, status){
         console.log(data);
         $scope.user = {};
-        $state.go('travellers');
+        $state.go('ownerProfile');
       }).catch(function(err){
         console.log(err);
       });
