@@ -45,6 +45,7 @@ var routes = function(passport) {
       console.log('user: ', user);
       if (err) { res.status(400).json('shorry bro'); }
 
+      // user.userType = req.body.userType;
       if (req.body.userType === 'owner') {
         user.owner = {
           firstName: req.body.owner.firstName,
@@ -107,6 +108,16 @@ var routes = function(passport) {
       res.json(houses);
     });
   });
+
+  router.get('/travellers', function(req, res) {
+    var travellers;
+    User.find({traveller: {$exists: true}}, function(err, user) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(user);
+    });
+  });  
 
   router.get("/listing/:houseId", function(req, res) {
     var houseId = req.params.houseId;
