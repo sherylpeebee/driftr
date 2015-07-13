@@ -111,10 +111,10 @@ var routes = function(passport) {
   // });
 
 
-  router.get("/listing/:location", function(req, res) {
-    var location = decodeURI(req.params.location);
-    console.log('location', location)
-    House.findOne({location: location}).exec(function(err, house) {
+  router.get("/listing/:houseId", function(req, res) {
+    var houseId = req.params.houseId;
+    // console.log('location', location);
+    House.findOne({_id: houseId}).exec(function(err, house) {
       if (err) {
         console.log(err);
         res.status(400).json({ error: "Could not read house data" });

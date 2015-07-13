@@ -8,7 +8,4 @@ angular.module('GriftrApp')
     $scope.houses = houses;
   });
 
-  $scope.viewListing = function(house){
-
-  }
 });
