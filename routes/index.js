@@ -41,8 +41,6 @@ var routes = function(passport) {
 
     console.log(req.body);
 
-
-
     User.findOne({'twitter.username': req.body.twitter.username}, function(err, user){
       console.log('user: ', user);
       if (err) { res.status(400).json('shorry bro'); }
@@ -52,18 +50,8 @@ var routes = function(passport) {
           firstName: req.body.owner.firstName,
           lastName: req.body.owner.lastName,
           email: req.body.owner.email,
-          // image: req.body.owner.image,
-          // startDate: req.body.owner.startDate,
-          // endDate: req.body.owner.endDate,
-          // info: {
-          //   pets: req.body.owner.pets,
-          //   plants: req.body.owner.plants,
-          //   updates: req.body.owner.updates,
-          //   smoking: req.body.owner.smoking,
-          //   other: req.body.owner.other
-          // }
         };
-      } else if (user.userType === 'traveller') {
+      } else if (req.body.userType === 'traveller') {
         user.traveller = {
           lastName: req.body.traveller.lastName,
           email: req.body.traveller.email,
@@ -88,6 +76,29 @@ var routes = function(passport) {
 
   });
 
+  router.post('/house', function(req, res) {
+    console.log(req.body);
+    var house = new House({
+      userID: req.body.user,
+      image: req.body.image,
+      location: req.body.location,
+      squareFoot: req.body.squareFoot,
+      bedrooms: req.body.bedrooms,
+      bathrooms: req.body.bathrooms,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate
+    });
+
+    house.save(function(err, savedHouse) {
+      if (err) {
+        console.log(err);
+        res.status(400).json({ error: "Validation Failed" });
+      }
+      console.log("House Saved:", savedHouse);
+      res.json(savedHouse);
+    });
+  });
+
   router.get('/listings', function(req, res) {
     House.find(function(err, houses) {
       if (err) {
@@ -96,22 +107,6 @@ var routes = function(passport) {
       res.json(houses);
     });
   });
-
-
-
-  // router.get('/listing/:location', function(req, res) {
-  //   var location = req.params.location;
-  //   House.findOne({"location": location},function(err, house) {
-  //     if (err) {
-  //       res.send(err);
-  //     }
-  //     // res.redirect("/listing/" + house.location)
-
-  //     res.json(house);
-  //   });
-  // });
-
-
 
   router.get("/listing/:houseId", function(req, res) {
     var houseId = req.params.houseId;
@@ -128,39 +123,6 @@ var routes = function(passport) {
     });
   });
 
-
-  router.post('/house', function(req, res) {
-    console.log(req.body);
-    // var house = new House({
-    //   userID: req.body.user,
-    //   image: req.body.image,
-    //   location: req.body.location,
-    //   bedrooms: req.body.bedrooms,
-    //   bathrooms: req.body.bathrooms,
-    //   startDate: req.body.startDate,
-    //   endDate: req.body.endDate
-    // });
-    //
-    // image: req.body.owner.image,
-    // startDate: req.body.owner.startDate,
-    // endDate: req.body.owner.endDate,
-    // info: {
-    //   pets: req.body.owner.pets,
-    //   plants: req.body.owner.plants,
-    //   updates: req.body.owner.updates,
-    //   smoking: req.body.owner.smoking,
-    //   other: req.body.owner.other
-    // }
-
-    // house.save(function(err, savedHouse) {
-    //   if (err) {
-    //     console.log(err);
-    //     res.status(400).json({ error: "Validation Failed" });
-    //   }
-    //   console.log("House Saved:", savedHouse);
-    //   res.json(savedHouse);
-    // });
-  });
 
 
   router.get("/auth/logout", function(req, res) {

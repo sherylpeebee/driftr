@@ -9,18 +9,10 @@ var userSchema = mongoose.Schema({
     username     : String
   },
   owner          : {
+    firstName     : String,
     lastName     : String,
-    email        : String,
-    image        : String,
-    startDate    : String,
-    endDate      : String,
-    info         : {
-      pets          : Boolean,
-      plants        : Boolean,
-      updates       : Boolean,
-      smoking       : Boolean,
-      other         : Boolean
-    }
+    email        : String
+
   },
   traveller      : {
     lastName     : String,
@@ -35,7 +27,7 @@ var userSchema = mongoose.Schema({
       smoking       : Boolean,
       other         : Boolean
     }
-  }  
+  }
 });
 
 module.exports = mongoose.model('User', userSchema);

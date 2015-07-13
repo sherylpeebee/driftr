@@ -86,6 +86,7 @@ console.log("get dat info");
 
       $http.post("/userinfo", currentUser).success(function(data, status){
         console.log(data);
+        $scope.user = {};
       }).catch(function(err){
         console.log(err);
       });
@@ -96,6 +97,7 @@ console.log("get dat info");
       console.log(currentUser);
       $http.post("/userinfo", currentUser).success(function(data, status){
         console.log(data);
+        $scope.traveller = {};
       }).catch(function(err){
         console.log(err);
       });
