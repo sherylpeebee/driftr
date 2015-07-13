@@ -110,12 +110,11 @@ var routes = function(passport) {
   });
 
   router.get('/travellers', function(req, res) {
-    var travellers;
-    User.find({traveller: {$exists: true}}, function(err, user) {
+    User.find({traveller: {$exists: true}}, function(err, travellers) {
       if (err) {
         res.send(err);
       }
-      res.json(user);
+      res.json(travellers);
     });
   });  
 
