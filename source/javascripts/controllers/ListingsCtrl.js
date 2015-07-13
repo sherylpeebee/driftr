@@ -7,5 +7,4 @@ angular.module('GriftrApp')
     // console.log(listings);
     $scope.houses = houses;
   });
-
 });
