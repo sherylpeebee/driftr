@@ -8,7 +8,7 @@ angular.module('GriftrApp')
   $stateProvider
   .state('home', {url: '/', templateUrl: '/templates/home.html', controller: "HomeCtrl"})
   .state('newProperty', {url: '/newProperty', templateUrl: '/templates/newProperty.html', controller: "PropCtrl"})
-  .state('listing', {url: '/listing/:house', templateUrl: '/templates/listing.html', controller: "  ListingsCtrl"})
+  .state('listing', {url: '/listing/:location', templateUrl: '/templates/listing.html', controller: "ListingsCtrl"})
   .state('listings', {url: '/listings', templateUrl: '/templates/listings.html', controller: "ListingsCtrl"})
   .state('info', {url: '', templateUrl: '/templates/info.html', abstract: true})
   .state('info.owner', {url: '/owner', templateUrl: '/templates/owner.html', controller: "InfoCtrl"})

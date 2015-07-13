@@ -1,0 +1,26 @@
+
+<div class="container">
+
+      <div class="row">
+        <h1>{{houseInfo.location}}</h1>
+        <div class="col s12">
+          <div class="card">
+            <div class="card-image">
+              <img ng-src="{{house.image}}">
+              <span class="card-title">{{houseInfo.location}}</span>
+            </div>
+            <div class="card-content">
+              <div>Bedrooms: {{houseInfo.bedrooms}}</div>
+              <div>Bathrooms: {{houseInfo.bathrooms}}</div>
+              <div>Start Date: {{houseInfo.startDate}}</div>
+              <div>End Date: {{houseInfo.endDate}}</div>
+            </div>
+            <div class="card-action">
+              <a ui-sref="listing({location: location})" ng-click="viewListing(house)">This is a link</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+</div>
