@@ -106,7 +106,13 @@ console.log("get dat info");
 'use strict()';
 
 angular.module('GriftrApp')
-.controller('ListingsCtrl', function($scope, $http, $rootScope, $location, Listing) {
+.controller('ListingCtrl', function($scope, $http, $rootScope, $location, Listing, $stateParams) {
+
+});
+'use strict()';
+
+angular.module('GriftrApp')
+.controller('ListingsCtrl', function($scope, $http, $rootScope, $location, Listing, $stateParams) {
   console.log('Listings ctrl');
   $http.get("/listings").success(function(houses){
     // console.log(listings);
@@ -114,16 +120,7 @@ angular.module('GriftrApp')
   });
 
   $scope.viewListing = function(house){
-    console.log(house);
-    // console.log(Listing.test());
-    Listing.getListing(house)
-    .then(function(data){
-      console.log(data.data);
-      $rootScope.houseInfo = data.data;
-    })
-    .catch(function(error){
-      console.log(error);
-    });
+
   }
 });
 'use strict()';

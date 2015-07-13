@@ -98,17 +98,17 @@ var routes = function(passport) {
 
 
 
-  router.get('/listing/:location', function(req, res) {
-    var location = req.params.location;
-    House.findOne({"location": location},function(err, house) {
-      if (err) {
-        res.send(err);
-      }
-      // res.redirect("/listing/" + house.location)
+  // router.get('/listing/:location', function(req, res) {
+  //   var location = req.params.location;
+  //   House.findOne({"location": location},function(err, house) {
+  //     if (err) {
+  //       res.send(err);
+  //     }
+  //     // res.redirect("/listing/" + house.location)
 
-      res.json(house);
-    });
-  });
+  //     res.json(house);
+  //   });
+  // });
 
 
   router.get("/listing/:location", function(req, res) {
