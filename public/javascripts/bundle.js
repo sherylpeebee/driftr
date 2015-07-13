@@ -67,17 +67,14 @@ console.log("get dat info");
 
   if($rootScope.currentUser){
     currentUser = $rootScope.currentUser;
-    firstName = $rootScope.currentUser.twitter.displayName;
   } else{
-    currentUser = null;
-    firstName = null;
+    currentUser = null; // Add more to catch null?
   }
 
   $scope.submitInfo = function(user){
     if($state.current.name === "info.owner"){
-      console.log(firstName);
+      currentUser.userType = 'owner';      
       currentUser.owner = user;
-      currentUser.owner.firstName = firstName;
       console.log(currentUser);
 
       $http.post("/userinfo", currentUser).success(function(data, status){
@@ -85,14 +82,12 @@ console.log("get dat info");
       }).catch(function(err){
         console.log(err);
       });
-
     }
     else if($state.current.name === "info.traveller"){
-      $rootScope.currentUser.traveller = user;
-      user.firstName = firstName;
-      console.log(user);
-
-      $http.post("/userInfo", user).success(function(data, status){
+      currentUser.userType = 'traveller';
+      currentUser.traveller = user;
+      console.log(currentUser);
+      $http.post("/userinfo", currentUser).success(function(data, status){
         console.log(data);
       }).catch(function(err){
         console.log(err);
