@@ -14,7 +14,6 @@ angular.module('GriftrApp')
   .state('info', {url: '', templateUrl: '/templates/info.html', abstract: true})
   .state('info.owner', {url: '/owner', templateUrl: '/templates/owner.html', controller: "InfoCtrl"})
   .state('info.traveller', {url: '/traveller', templateUrl: '/templates/traveller.html', controller: "InfoCtrl"})
-  .state('travellers', {url: '/travellers', templateUrl: '/templates/travellers.html', controller: "InfoCtrl"});
 
 })
 .constant('urls',{

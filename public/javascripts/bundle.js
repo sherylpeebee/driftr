@@ -22,13 +22,25 @@ angular.module('GriftrApp')
   .state('info', {url: '', templateUrl: '/templates/info.html', abstract: true})
   .state('info.owner', {url: '/owner', templateUrl: '/templates/owner.html', controller: "InfoCtrl"})
   .state('info.traveller', {url: '/traveller', templateUrl: '/templates/traveller.html', controller: "InfoCtrl"})
-  .state('travellers', {url: '/travellers', templateUrl: '/templates/travellers.html', controller: "InfoCtrl"});
 
 })
 .constant('urls',{
   'apiUrl': ''
 });
 
+angular.module('GriftrApp')
+.factory("Listing", function($http){
+  function Listing(){};
+  Listing.test = function() {
+    console.log('this is a test');
+    // return 'this is a test';
+  }
+  Listing.getListing = function(houseId){
+    console.log('house: ', houseId);
+    return $http.get("/listing/" + houseId);
+  }
+  return Listing;
+});
 angular.module('GriftrApp')
 .controller("HomeCtrl", function(){
   console.log("HOME CONTROLLLLLL!!!");
@@ -162,24 +174,18 @@ angular.module('GriftrApp')
 'use strict()';
 
 angular.module('GriftrApp')
+.controller('TravellersCtrl', function($scope, $http, $rootScope) {
+
+  
+});
+
+'use strict()';
+
+angular.module('GriftrApp')
 .controller('NavCtrl', function($scope, $http, $rootScope) {
   console.log('nav ctrl');
   $http.get("/getUserData").success(function(userData){
     console.log(userData);
     $rootScope.currentUser = userData;
   });
-});
-
-angular.module('GriftrApp')
-.factory("Listing", function($http){
-  function Listing(){};
-  Listing.test = function() {
-    console.log('this is a test');
-    // return 'this is a test';
-  }
-  Listing.getListing = function(houseId){
-    console.log('house: ', houseId);
-    return $http.get("/listing/" + houseId);
-  }
-  return Listing;
 });
