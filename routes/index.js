@@ -116,17 +116,18 @@ var routes = function(passport) {
       }
       res.json(travellers);
     });
-  });  
+  });
 
   router.get('/ownerProfile', function(req, res) {
-    User.findOne({'twitter.id': req.body.user.twitter }, function(err, owner) {
-      if (err) {
-        res.send(err);
-      }
-      console.log(owner);
-      res.json(owner);
-    });
-  });  
+    console.log(req);
+    // User.findOne({'twitter.id': req.body.user.twitter }, function(err, owner) {
+    //   if (err) {
+    //     res.send(err);
+    //   }
+    //   console.log(owner);
+    //   res.json(owner);
+    // });
+  });
 
 
   router.get("/listing/:houseId", function(req, res) {
