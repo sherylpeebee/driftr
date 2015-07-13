@@ -119,15 +119,30 @@ var routes = function(passport) {
   });
 
   router.get('/ownerProfile', function(req, res) {
-    console.log(req);
-    // User.findOne({'twitter.id': req.body.user.twitter }, function(err, owner) {
-    //   if (err) {
-    //     res.send(err);
-    //   }
-    //   console.log(owner);
-    //   res.json(owner);
-    // });
+    console.log(req.user.twitter.id);
+    House.find({'userID': req.user.twitter.id }, function(err, houses) {
+      if (err) {
+        res.send(err);
+      }
+      console.log(houses);
+      res.json(houses);
+    });
   });  
+
+
+  // router.get('/ownerProfile', function(req, res) {
+  //   console.log(req.user.twitter.id);
+  //   House.find({'userID': req.user.twitter.id }, function(err, houses) {
+  //     if (err) {
+  //       res.send(err);
+  //     }
+  //     console.log(houses);
+  //     res.json(houses);
+  //   });
+  // });  
+
+
+
 
   router.get("/listing/:houseId", function(req, res) {
     var houseId = req.params.houseId;
