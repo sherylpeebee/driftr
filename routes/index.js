@@ -87,7 +87,7 @@ var routes = function(passport) {
 
   });
 
-  router.get('/houses', function(req, res) {
+  router.get('/listings', function(req, res) {
     House.find(function(err, houses) {
       if (err) {
         res.send(err);
@@ -95,6 +95,7 @@ var routes = function(passport) {
       res.json(houses);
     });
   });
+
   router.get('/house/:location', function(req, res) {
     var location = req.params.location;
     House.findOne({"location": location},function(err, house) {
