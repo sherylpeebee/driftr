@@ -49,20 +49,21 @@ var routes = function(passport) {
 
       if (user.userType === 'owner') {
         user.owner = {
+          firstName: req.body.owner.firstName,
           lastName: req.body.owner.lastName,
           email: req.body.owner.email,
-          image: req.body.owner.image,
-          startDate: req.body.owner.startDate,
-          endDate: req.body.owner.endDate,
-          info: {
-            pets: req.body.owner.pets,
-            plants: req.body.owner.plants,
-            updates: req.body.owner.updates,
-            smoking: req.body.owner.smoking,
-            other: req.body.owner.other
-          }
+          // image: req.body.owner.image,
+          // startDate: req.body.owner.startDate,
+          // endDate: req.body.owner.endDate,
+          // info: {
+          //   pets: req.body.owner.pets,
+          //   plants: req.body.owner.plants,
+          //   updates: req.body.owner.updates,
+          //   smoking: req.body.owner.smoking,
+          //   other: req.body.owner.other
+          // }
         };
-      } else {
+      } else if (user.userType === 'traveller') {
         user.traveller = {
           lastName: req.body.traveller.lastName,
           email: req.body.traveller.email,
@@ -113,7 +114,7 @@ var routes = function(passport) {
 
   router.get("/listing/:location", function(req, res) {
     var location = decodeURI(req.params.location);
-    console.log('location', location)
+    console.log('location', location);
     House.findOne({location: location}).exec(function(err, house) {
       if (err) {
         console.log(err);
@@ -129,24 +130,35 @@ var routes = function(passport) {
 
   router.post('/house', function(req, res) {
     console.log(req.body);
-    var house = new House({
-      userID: req.body.user,
-      image: req.body.image,
-      location: req.body.location,
-      bedrooms: req.body.bedrooms,
-      bathrooms: req.body.bathrooms,
-      startDate: req.body.startDate,
-      endDate: req.body.endDate
-    });
+    // var house = new House({
+    //   userID: req.body.user,
+    //   image: req.body.image,
+    //   location: req.body.location,
+    //   bedrooms: req.body.bedrooms,
+    //   bathrooms: req.body.bathrooms,
+    //   startDate: req.body.startDate,
+    //   endDate: req.body.endDate
+    // });
+    //
+    // image: req.body.owner.image,
+    // startDate: req.body.owner.startDate,
+    // endDate: req.body.owner.endDate,
+    // info: {
+    //   pets: req.body.owner.pets,
+    //   plants: req.body.owner.plants,
+    //   updates: req.body.owner.updates,
+    //   smoking: req.body.owner.smoking,
+    //   other: req.body.owner.other
+    // }
 
-    house.save(function(err, savedHouse) {
-      if (err) {
-        console.log(err);
-        res.status(400).json({ error: "Validation Failed" });
-      }
-      console.log("House Saved:", savedHouse);
-      res.json(savedHouse);
-    });
+    // house.save(function(err, savedHouse) {
+    //   if (err) {
+    //     console.log(err);
+    //     res.status(400).json({ error: "Validation Failed" });
+    //   }
+    //   console.log("House Saved:", savedHouse);
+    //   res.json(savedHouse);
+    // });
   });
 
 
