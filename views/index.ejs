@@ -15,7 +15,7 @@
 <body>
   <nav class="light-blue lighten-1" role="navigation" ng-controller="NavCtrl">
 
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Griftr</a>
+    <div class="nav-wrapper container"><a id="logo-container" ui-sref="home" class="brand-logo">Griftr</a>
       <ul class="right hide-on-med-and-down">
         <% if (user) { %>
           <li>{{currentUser.twitter.displayName}}</li>
@@ -40,7 +40,7 @@
 <%# end of navbar%>
 
   <ui-view></ui-view>
-        
+
 
   <footer class="page-footer orange">
     <div class="container">
