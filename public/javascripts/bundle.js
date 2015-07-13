@@ -16,7 +16,7 @@ angular.module('GriftrApp')
   $stateProvider
   .state('home', {url: '/', templateUrl: '/templates/home.html', controller: "HomeCtrl"})
   .state('newProperty', {url: '/newProperty', templateUrl: '/templates/newProperty.html', controller: "PropCtrl"})
-  .state('listing', {url: '/listing/:location', templateUrl: '/templates/listing.html', controller: "ListingsCtrl"})
+  .state('listing', {url: '/listing/:houseId', templateUrl: '/templates/listing.html', controller: "ListingCtrl"})
   .state('listings', {url: '/listings', templateUrl: '/templates/listings.html', controller: "ListingsCtrl"})
   .state('info', {url: '', templateUrl: '/templates/info.html', abstract: true})
   .state('info.owner', {url: '/owner', templateUrl: '/templates/owner.html', controller: "InfoCtrl"})
@@ -121,15 +121,15 @@ angular.module('GriftrApp')
 .controller('ListingCtrl', function($scope, $http, $rootScope, $location, Listing, $stateParams) {
 
     // console.log(house);
-    console.log($stateParams);
-    // Listing.getListing(house)
-    // .then(function(data){
-    //   console.log(data.data);
-    //   $rootScope.houseInfo = data.data;
-    // })
-    // .catch(function(error){
-    //   console.log(error);
-    // });
+    $scope.params = $stateParams;
+    Listing.getListing($stateParams.houseId)
+    .then(function(data){
+      console.log(data.data);
+      $scope.houseInfo = data.data;
+    })
+    .catch(function(error){
+      console.log(error);
+    });
 
 });
 'use strict()';
@@ -142,9 +142,6 @@ angular.module('GriftrApp')
     $scope.houses = houses;
   });
 
-  $scope.viewListing = function(house){
-
-  }
 });
 'use strict()';
 
@@ -185,8 +182,9 @@ angular.module('GriftrApp')
     console.log('this is a test');
     // return 'this is a test';
   }
-  Listing.getListing = function(house){
-    return $http.get("/listing/" + house.location);
+  Listing.getListing = function(houseId){
+    console.log('house: ', houseId);
+    return $http.get("/listing/" + houseId);
   }
   return Listing;
 });

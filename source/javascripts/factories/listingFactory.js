@@ -5,8 +5,9 @@ angular.module('GriftrApp')
     console.log('this is a test');
     // return 'this is a test';
   }
-  Listing.getListing = function(house){
-    return $http.get("/listing/" + house.location);
+  Listing.getListing = function(houseId){
+    console.log('house: ', houseId);
+    return $http.get("/listing/" + houseId);
   }
   return Listing;
 });
