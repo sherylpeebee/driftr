@@ -116,11 +116,11 @@ var routes = function(passport) {
       }
       res.json(travellers);
     });
-  });  
+  });
 
   router.get('/ownerProfile', function(req, res) {
-    console.log(req.user);
-    // User.findOne({'twitter.id': req.body.user.twitter.id }, function(err, owner) {
+    console.log(req);
+    // User.findOne({'twitter.id': req.body.user.twitter }, function(err, owner) {
     //   if (err) {
     //     res.send(err);
     //   }
@@ -128,7 +128,6 @@ var routes = function(passport) {
     //   res.json(owner);
     // });
   });  
-
 
   router.get("/listing/:houseId", function(req, res) {
     var houseId = req.params.houseId;
