@@ -130,16 +130,21 @@ var routes = function(passport) {
   });  
 
 
-  // router.get('/ownerProfile', function(req, res) {
-  //   console.log(req.user.twitter.id);
-  //   House.find({'userID': req.user.twitter.id }, function(err, houses) {
-  //     if (err) {
-  //       res.send(err);
-  //     }
-  //     console.log(houses);
-  //     res.json(houses);
-  //   });
-  // });  
+  router.delete('/ownerProfile', function(req, res) {
+    console.log(req.user.twitter.id);
+    House.findOne({_id: houseId}).exec(function(err, house) {
+      if (err) {
+        console.log(err);
+        res.status(400).json({ error: "Could not read house data" });
+      }
+      if (!house) {
+        res.status(404);
+      }
+      house.remove().exec();
+      res.json('house deleted');
+    });
+
+  });  
 
 
 
