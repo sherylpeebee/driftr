@@ -68,6 +68,7 @@ console.log("get dat info");
       $http.post("/userinfo", currentUser).success(function(data, status){
         console.log(data);
         $scope.user = {};
+        $state.go('travellers');
       }).catch(function(err){
         console.log(err);
       });
@@ -79,6 +80,7 @@ console.log("get dat info");
       $http.post("/userinfo", currentUser).success(function(data, status){
         console.log(data);
         $scope.traveller = {};
+        $state.go('listings');
       }).catch(function(err){
         console.log(err);
       });
@@ -132,19 +134,6 @@ angular.module('GriftrApp')
 .controller('PropCtrl', function($scope, $http, $rootScope) {
   console.log('Prop ctrl');
   $scope.test = 'Test!';
-  // $scope.submitProperty = function(house){
-  //   house.user = $rootScope.currentUser.twitter.id;
-  //   house.image = 'http://www.keralahouseplanner.com/wp-content/uploads/2012/09/kerala-house-plan-duplex1.jpg';
-  //   // house.user = currentUser;
-  //   console.log(house);
-  //   $http.post("/house", house).success(function(data, status){
-  //     console.log(data);
-  //   }).catch(function(err){
-  //     console.log(err);
-  //   });
-  // };
-
-
 });
 
 'use strict()';
@@ -170,6 +159,7 @@ angular.module('GriftrApp')
   .state('newProperty', {url: '/newProperty', templateUrl: '/templates/newProperty.html', controller: "PropCtrl"})
   .state('listing', {url: '/listing/:houseId', templateUrl: '/templates/listing.html', controller: "ListingCtrl"})
   .state('listings', {url: '/listings', templateUrl: '/templates/listings.html', controller: "ListingsCtrl"})
+  .state('travellers', {url: '/travellers', templateUrl: '/templates/travellers.html', controller: "TravellersCtrl"})
   .state('info', {url: '', templateUrl: '/templates/info.html', abstract: true})
   .state('info.owner', {url: '/owner', templateUrl: '/templates/owner.html', controller: "InfoCtrl"})
   .state('info.traveller', {url: '/traveller', templateUrl: '/templates/traveller.html', controller: "InfoCtrl"});
