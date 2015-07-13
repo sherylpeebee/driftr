@@ -153,6 +153,14 @@ angular.module('GriftrApp')
 'use strict()';
 
 angular.module('GriftrApp')
+.controller('ProfileCtrl', function($scope, $http, $rootScope) {
+  console.log('Profile ctrl');
+  $scope.test = 'Test!';
+});
+
+'use strict()';
+
+angular.module('GriftrApp')
 .controller('PropCtrl', function($scope, $http, $rootScope) {
   console.log('Prop ctrl');
   $scope.test = 'Test!';
