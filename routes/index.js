@@ -46,7 +46,7 @@ var routes = function(passport) {
     User.findOne({'twitter.username': req.body.twitter.username}, function(err, user){
       console.log('user: ', user);
       if (err) { res.status(400).json('shorry bro'); }
-      
+
       if (user.userType === 'owner') {
         user.owner = {
           lastName: req.body.owner.lastName,
@@ -61,7 +61,7 @@ var routes = function(passport) {
             smoking: req.body.owner.smoking,
             other: req.body.owner.other
           }
-        }
+        };
       } else {
         user.traveller = {
           lastName: req.body.traveller.lastName,
@@ -76,7 +76,7 @@ var routes = function(passport) {
             smoking: req.body.traveller.smoking,
             other: req.body.traveller.other
           }
-        }        
+        };
       }
 
       user.save(function(){

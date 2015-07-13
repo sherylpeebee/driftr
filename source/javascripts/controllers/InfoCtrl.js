@@ -10,7 +10,7 @@ console.log("get dat info");
 
   $scope.submitInfo = function(user){
     if($state.current.name === "info.owner"){
-      currentUser.userType = 'owner';      
+      currentUser.userType = 'owner';
       currentUser.owner = user;
       console.log(currentUser);
 
@@ -30,5 +30,17 @@ console.log("get dat info");
         console.log(err);
       });
     }
+  };
+
+  $scope.submitProperty = function(house){
+    house.user = $rootScope.currentUser.twitter.id;
+    house.image = 'http://www.keralahouseplanner.com/wp-content/uploads/2012/09/kerala-house-plan-duplex1.jpg';
+    // house.user = currentUser;
+    console.log(house);
+    $http.post("/house", house).success(function(data, status){
+      console.log(data);
+    }).catch(function(err){
+      console.log(err);
+    });
   };
 });
