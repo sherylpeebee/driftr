@@ -10,7 +10,7 @@ angular.module('GriftrApp')
         $("#intro").addClass("animated bounceInRight").one(animationEnd, function(){
           //need to adjust times of these. too fast. kinda funky looking
           $(this).removeClass("animated bounceInRight").addClass("animated slideOutUp").one(animationEnd, function(){
-            $("#right-banner").animate({ top: -126 }, function(){
+            $(".banner").animate({ top: -126 }, function(){
               $(".find").fadeIn();
               console.log("hey");
             });
