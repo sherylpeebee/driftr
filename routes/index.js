@@ -130,8 +130,8 @@ var routes = function(passport) {
   });  
 
 
-  router.delete('/ownerProfile', function(req, res) {
-    console.log(req.user.twitter.id);
+  router.delete('/ownerProfile/:houseId', function(req, res) {
+    var houseId = req.params.houseId;    
     House.findOne({_id: houseId}).exec(function(err, house) {
       if (err) {
         console.log(err);
@@ -140,7 +140,7 @@ var routes = function(passport) {
       if (!house) {
         res.status(404);
       }
-      house.remove().exec();
+      house.remove();
       res.json('house deleted');
     });
 
