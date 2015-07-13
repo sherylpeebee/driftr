@@ -148,7 +148,6 @@ angular.module('GriftrApp')
     // console.log(listings);
     $scope.houses = houses;
   });
-
 });
 'use strict()';
 
@@ -162,8 +161,10 @@ angular.module('GriftrApp')
 
 angular.module('GriftrApp')
 .controller('TravellersCtrl', function($scope, $http, $rootScope) {
-
-  
+  $http.get("/travellers").success(function(travellers){
+    // console.log(listings);
+    $scope.travellers = travellers;
+  });  
 });
 
 'use strict()';
