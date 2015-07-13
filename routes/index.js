@@ -119,13 +119,14 @@ var routes = function(passport) {
   });  
 
   router.get('/ownerProfile', function(req, res) {
-    User.findOne({'twitter.id': req.body.user.twitter }, function(err, owner) {
-      if (err) {
-        res.send(err);
-      }
-      console.log(owner);
-      res.json(owner);
-    });
+    console.log(req.user);
+    // User.findOne({'twitter.id': req.body.user.twitter.id }, function(err, owner) {
+    //   if (err) {
+    //     res.send(err);
+    //   }
+    //   console.log(owner);
+    //   res.json(owner);
+    // });
   });  
 
 
