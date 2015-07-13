@@ -14,4 +14,9 @@ angular.module('GriftrApp')
 {image: "http://www.loghouse.fi/wp-content/uploads/2011/11/log-house-5.jpg", squareFoot: 8788, bedrooms: 12, bathrooms: 14},
 {image: "http://www.loghouse.fi/wp-content/uploads/2011/11/log-house-5.jpg", squareFoot: 8788, bedrooms: 12, bathrooms: 14}
 ];
+
+
+$scope.removeListing = function(index){
+$scope.houses.splice(index, 1);
+};
 });
