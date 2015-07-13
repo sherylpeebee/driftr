@@ -110,6 +110,23 @@ var routes = function(passport) {
     });
   });
 
+
+  router.get("/listing/:location", function(req, res) {
+    var location = decodeURI(req.params.location);
+    console.log('location', location)
+    House.findOne({location: location}).exec(function(err, house) {
+      if (err) {
+        console.log(err);
+        res.status(400).json({ error: "Could not read house data" });
+      }
+      if (!house) {
+        res.status(404);
+      }
+      res.json(house);
+    });
+  });
+
+
   router.post('/house', function(req, res) {
     console.log(req.body);
     var house = new House({
@@ -137,7 +154,6 @@ var routes = function(passport) {
     req.logout();
     res.redirect("/");
   });
-
 
 
   // router.post('/tweet', function(req, res, next) {

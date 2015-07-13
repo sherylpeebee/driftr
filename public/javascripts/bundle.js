@@ -16,7 +16,7 @@ angular.module('GriftrApp')
   $stateProvider
   .state('home', {url: '/', templateUrl: '/templates/home.html', controller: "HomeCtrl"})
   .state('newProperty', {url: '/newProperty', templateUrl: '/templates/newProperty.html', controller: "PropCtrl"})
-  .state('listing', {url: '/listing/:house', templateUrl: '/templates/listing.html', controller: "  ListingsCtrl"})
+  .state('listing', {url: '/listing/:location', templateUrl: '/templates/listing.html', controller: "ListingsCtrl"})
   .state('listings', {url: '/listings', templateUrl: '/templates/listings.html', controller: "ListingsCtrl"})
   .state('info', {url: '', templateUrl: '/templates/info.html', abstract: true})
   .state('info.owner', {url: '/owner', templateUrl: '/templates/owner.html', controller: "InfoCtrl"})
@@ -30,7 +30,10 @@ angular.module('GriftrApp')
 angular.module('GriftrApp')
 .controller("HomeCtrl", function(){
   console.log("HOME CONTROLLLLLL!!!");
+
   $(document).ready(function(){
+
+
     $('.light').textillate({ in: { effect: 'rollIn' } });
 
     var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
@@ -103,7 +106,7 @@ console.log("get dat info");
 'use strict()';
 
 angular.module('GriftrApp')
-.controller('ListingsCtrl', function($scope, $http, $rootScope, $location) {
+.controller('ListingsCtrl', function($scope, $http, $rootScope, $location, Listing) {
   console.log('Listings ctrl');
   $http.get("/listings").success(function(houses){
     // console.log(listings);
@@ -112,16 +115,17 @@ angular.module('GriftrApp')
 
   $scope.viewListing = function(house){
     console.log(house);
-    $http.get("/listing/" + house.location)
+    // console.log(Listing.test());
+    Listing.getListing(house)
     .then(function(data){
-      console.log(data);
+      console.log(data.data);
+      $rootScope.houseInfo = data.data;
     })
     .catch(function(error){
       console.log(error);
     });
   }
 });
-
 'use strict()';
 
 angular.module('GriftrApp')
@@ -175,4 +179,17 @@ angular.module('GriftrApp')
     console.log(userData);
     $rootScope.currentUser = userData;
   });
+});
+
+angular.module('GriftrApp')
+.factory("Listing", function($http){
+  function Listing(){};
+  Listing.test = function() {
+    console.log('this is a test');
+    // return 'this is a test';
+  }
+  Listing.getListing = function(house){
+    return $http.get("/listing/" + house.location);
+  }
+  return Listing;
 });

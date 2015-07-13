@@ -1,7 +1,10 @@
 angular.module('GriftrApp')
 .controller("HomeCtrl", function(){
   console.log("HOME CONTROLLLLLL!!!");
+
   $(document).ready(function(){
+
+
     $('.light').textillate({ in: { effect: 'rollIn' } });
 
     var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
