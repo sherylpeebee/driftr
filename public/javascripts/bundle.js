@@ -168,8 +168,10 @@ angular.module('GriftrApp')
 ];
 
 
-  $scope.removeListing = function(index){
+  $scope.removeListing = function(index, house){
   $scope.houses.splice(index, 1);
+  console.log(house);
+  // $http.delete("/ownerProfile" )
 
   };
 });
