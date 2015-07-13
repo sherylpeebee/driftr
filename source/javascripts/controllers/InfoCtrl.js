@@ -11,7 +11,9 @@ console.log("get dat info");
   $scope.submitInfo = function(user){
     if($state.current.name === "info.owner"){
       currentUser.userType = 'owner';
-      currentUser.owner = user;
+      currentUser.owner.firstName = user.firstName;
+      currentUser.owner.lastName = user.lastName;
+      currentUser.owner.email = user.email;
       console.log(currentUser);
 
       $http.post("/userinfo", currentUser).success(function(data, status){

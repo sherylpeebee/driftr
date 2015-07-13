@@ -6,27 +6,6 @@ app.run(function(){
   console.log('Griftr Online');
 });
 
-'use strict()';
-
-angular.module('GriftrApp')
-.config(function($stateProvider, $urlRouterProvider){
-
-  $urlRouterProvider.otherwise('/');
-
-  $stateProvider
-  .state('home', {url: '/', templateUrl: '/templates/home.html', controller: "HomeCtrl"})
-  .state('newProperty', {url: '/newProperty', templateUrl: '/templates/newProperty.html', controller: "PropCtrl"})
-  .state('listing', {url: '/listing/:houseId', templateUrl: '/templates/listing.html', controller: "ListingCtrl"})
-  .state('listings', {url: '/listings', templateUrl: '/templates/listings.html', controller: "ListingsCtrl"})
-  .state('info', {url: '', templateUrl: '/templates/info.html', abstract: true})
-  .state('info.owner', {url: '/owner', templateUrl: '/templates/owner.html', controller: "InfoCtrl"})
-  .state('info.traveller', {url: '/traveller', templateUrl: '/templates/traveller.html', controller: "InfoCtrl"});
-
-})
-.constant('urls',{
-  'apiUrl': ''
-});
-
 angular.module('GriftrApp')
 .controller("HomeCtrl", function(){
   console.log("HOME CONTROLLLLLL!!!");
@@ -81,7 +60,9 @@ console.log("get dat info");
   $scope.submitInfo = function(user){
     if($state.current.name === "info.owner"){
       currentUser.userType = 'owner';
-      currentUser.owner = user;
+      currentUser.owner.firstName = user.firstName;
+      currentUser.owner.lastName = user.lastName;
+      currentUser.owner.email = user.email;
       console.log(currentUser);
 
       $http.post("/userinfo", currentUser).success(function(data, status){
@@ -175,6 +156,27 @@ angular.module('GriftrApp')
     console.log(userData);
     $rootScope.currentUser = userData;
   });
+});
+
+'use strict()';
+
+angular.module('GriftrApp')
+.config(function($stateProvider, $urlRouterProvider){
+
+  $urlRouterProvider.otherwise('/');
+
+  $stateProvider
+  .state('home', {url: '/', templateUrl: '/templates/home.html', controller: "HomeCtrl"})
+  .state('newProperty', {url: '/newProperty', templateUrl: '/templates/newProperty.html', controller: "PropCtrl"})
+  .state('listing', {url: '/listing/:houseId', templateUrl: '/templates/listing.html', controller: "ListingCtrl"})
+  .state('listings', {url: '/listings', templateUrl: '/templates/listings.html', controller: "ListingsCtrl"})
+  .state('info', {url: '', templateUrl: '/templates/info.html', abstract: true})
+  .state('info.owner', {url: '/owner', templateUrl: '/templates/owner.html', controller: "InfoCtrl"})
+  .state('info.traveller', {url: '/traveller', templateUrl: '/templates/traveller.html', controller: "InfoCtrl"});
+
+})
+.constant('urls',{
+  'apiUrl': ''
 });
 
 angular.module('GriftrApp')
