@@ -19,6 +19,7 @@ console.log("get dat info");
       $http.post("/userinfo", currentUser).success(function(data, status){
         console.log(data);
         $scope.user = {};
+        $state.go('travellers');
       }).catch(function(err){
         console.log(err);
       });
@@ -30,6 +31,7 @@ console.log("get dat info");
       $http.post("/userinfo", currentUser).success(function(data, status){
         console.log(data);
         $scope.traveller = {};
+        $state.go('listings');
       }).catch(function(err){
         console.log(err);
       });
