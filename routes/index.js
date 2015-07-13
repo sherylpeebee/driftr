@@ -96,34 +96,39 @@ var routes = function(passport) {
     });
   });
 
-  router.get('/house/:location', function(req, res) {
+
+
+  router.get('/listing/:location', function(req, res) {
     var location = req.params.location;
     House.findOne({"location": location},function(err, house) {
       if (err) {
         res.send(err);
       }
+      // res.redirect("/listing/" + house.location)
+
       res.json(house);
     });
   });
 
-  router.post('/houses', function(req, res) {
-
+  router.post('/house', function(req, res) {
+    console.log(req.body);
     var house = new House({
+      userID: req.body.user,
+      image: req.body.image,
       location: req.body.location,
       bedrooms: req.body.bedrooms,
       bathrooms: req.body.bathrooms,
-      petsAllowed: req.body.petsAllowed,
-      startDate: Date.now(),
-      endDate: Date.now()
+      startDate: req.body.startDate,
+      endDate: req.body.endDate
     });
 
-  house.save(function(err, savedHouse) {
-    if (err) {
-      console.log(err);
-      res.status(400).json({ error: "Validation Failed" });
-    }
-    console.log("House Saved:", savedHouse);
-    res.json(savedHouse);
+    house.save(function(err, savedHouse) {
+      if (err) {
+        console.log(err);
+        res.status(400).json({ error: "Validation Failed" });
+      }
+      console.log("House Saved:", savedHouse);
+      res.json(savedHouse);
     });
   });
 

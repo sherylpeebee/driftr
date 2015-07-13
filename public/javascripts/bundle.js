@@ -16,7 +16,8 @@ angular.module('GriftrApp')
   $stateProvider
   .state('home', {url: '/', templateUrl: '/templates/home.html', controller: "HomeCtrl"})
   .state('newProperty', {url: '/newProperty', templateUrl: '/templates/newProperty.html', controller: "PropCtrl"})
-  .state('listings', {url: '/listings', templateUrl: '/templates/liststings.html', controller: "ListingsCtrl"})
+  .state('listing', {url: '/listing/:house', templateUrl: '/templates/listing.html', controller: "  ListingsCtrl"})
+  .state('listings', {url: '/listings', templateUrl: '/templates/listings.html', controller: "ListingsCtrl"})
   .state('info', {url: '', templateUrl: '/templates/info.html', abstract: true})
   .state('info.owner', {url: '/owner', templateUrl: '/templates/owner.html', controller: "InfoCtrl"})
   .state('info.traveller', {url: '/traveller', templateUrl: '/templates/traveller.html', controller: "InfoCtrl"});
@@ -102,12 +103,23 @@ console.log("get dat info");
 'use strict()';
 
 angular.module('GriftrApp')
-.controller('ListingsCtrl', function($scope, $http, $rootScope) {
+.controller('ListingsCtrl', function($scope, $http, $rootScope, $location) {
   console.log('Listings ctrl');
-  $http.get("/listings").success(function(listings){
-    console.log(listings);
-    $scope.listings = listings;
+  $http.get("/listings").success(function(houses){
+    // console.log(listings);
+    $scope.houses = houses;
   });
+
+  $scope.viewListing = function(house){
+    console.log(house);
+    $http.get("/listing/" + house.location)
+    .then(function(data){
+      console.log(data);
+    })
+    .catch(function(error){
+      console.log(error);
+    });
+  }
 });
 
 'use strict()';
@@ -115,31 +127,43 @@ angular.module('GriftrApp')
 angular.module('GriftrApp')
 .controller('PropCtrl', function($scope, $http, $rootScope) {
   console.log('Prop ctrl');
-  // $scope.submitInfo = function(user){
-  //   if($state.current.name === "info.owner"){
-  //     currentUser.userType = 'owner';      
-  //     currentUser.owner = user;
-  //     console.log(currentUser);
+  $scope.test = 'Test!';
+  $scope.submitProperty = function(house){
+    house.user = $rootScope.currentUser.twitter.id;
+    house.image = 'http://www.keralahouseplanner.com/wp-content/uploads/2012/09/kerala-house-plan-duplex1.jpg';
+    // house.user = currentUser;
+    console.log(house);
+    $http.post("/house", house).success(function(data, status){
+      console.log(data);
+    }).catch(function(err){
+      console.log(err);
+    });
 
-  //     $http.post("/userinfo", currentUser).success(function(data, status){
-  //       console.log(data);
-  //     }).catch(function(err){
-  //       console.log(err);
-  //     });
-  //   }
-  //   else if($state.current.name === "info.traveller"){
-  //     currentUser.userType = 'traveller';
-  //     currentUser.traveller = user;
-  //     console.log(currentUser);
-  //     $http.post("/userinfo", currentUser).success(function(data, status){
-  //       console.log(data);
-  //     }).catch(function(err){
-  //       console.log(err);
-  //     });
-  //   }
-  // };
 
-  
+    // if($state.current.name === "info.owner"){
+    //   currentUser.userType = 'owner';      
+    //   currentUser.owner = user;
+    //   console.log(currentUser);
+
+    //   $http.post("/userinfo", currentUser).success(function(data, status){
+    //     console.log(data);
+    //   }).catch(function(err){
+    //     console.log(err);
+    //   });
+    // }
+    // else if($state.current.name === "info.traveller"){
+    //   currentUser.userType = 'traveller';
+    //   currentUser.traveller = user;
+    //   console.log(currentUser);
+    //   $http.post("/userinfo", currentUser).success(function(data, status){
+    //     console.log(data);
+    //   }).catch(function(err){
+    //     console.log(err);
+    //   });
+    // }
+  };
+
+
 });
 
 'use strict()';

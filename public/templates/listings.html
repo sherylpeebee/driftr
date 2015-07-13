@@ -1,0 +1,25 @@
+<div class="container">
+
+      <div class="row">
+        <h1>HOUSES</h1>
+        <div class="col s4" ng-repeat='house in houses track by $index' >
+          <div class="card">
+            <div class="card-image">
+              <img ng-src="{{house.image}}">
+              <span class="card-title">{{house.location}}</span>
+            </div>
+            <div class="card-content">
+              <div>Bedrooms: {{house.bedrooms}}</div>
+              <div>Bathrooms: {{house.bathrooms}}</div>
+              <div>Start Date: {{house.startDate}}</div>
+              <div>End Date: {{house.endDate}}</div>
+            </div>
+            <div class="card-action">
+              <a href="#" ng-click="viewListing(house)">This is a link</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+</div>
