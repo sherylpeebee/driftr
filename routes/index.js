@@ -47,7 +47,7 @@ var routes = function(passport) {
       console.log('user: ', user);
       if (err) { res.status(400).json('shorry bro'); }
 
-      if (user.userType === 'owner') {
+      if (req.body.userType === 'owner') {
         user.owner = {
           firstName: req.body.owner.firstName,
           lastName: req.body.owner.lastName,
