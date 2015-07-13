@@ -1,0 +1,23 @@
+<div class="container">
+      <div class="row">
+        <h1>GRIFTRRRSSSS</h1>
+        <div class="col s4" ng-repeat='traveller in travellers track by $index' >
+          <div class="card">
+            <div class="card-image">
+              <img ng-src="{{traveller.image}}">
+              <span class="card-title">{{traveller.location}}</span>
+            </div>
+            <div class="card-content">
+              <div>Start Date: {{traveller.startDate}}</div>
+              <div>End Date: {{traveller.endDate}}</div>
+              <div>Id: {{traveller._id}}</div>
+            </div>
+            <div class="card-action">
+              <a ui-sref="listing({travellerId: traveller._id})">This is a link</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+</div>
