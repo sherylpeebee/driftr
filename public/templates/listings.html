@@ -2,7 +2,7 @@
 <div class="container">
       <div class="row">
         <h1>HOUSES</h1>
-<input type="text" name="name" value="" placeholder="Search Homes" ng-model= "search">
+<input type="text" name="name" value="" placeholder="Search Homes" ng-model= "search" class="blue-text text-lighten-3">
         <div class="col s4" ng-repeat='house in houses | filter:search' >
           <div class="card">
             <div class="card-image">
@@ -18,6 +18,8 @@
               <div>Id: {{house._id}}</div>
             </div>
             <div class="card-action">
+
+            </div>
               <a ui-sref="listing({houseId: house._id})">House Info</a>
             </div>
           </div>

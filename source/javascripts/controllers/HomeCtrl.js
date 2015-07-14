@@ -3,6 +3,7 @@ angular.module('GriftrApp')
   console.log("HOME CONTROLLLLLL!!!");
 
   $(document).ready(function(){
+    $('.parallax').parallax();
 
 
     $('.light').textillate({ in: { effect: 'rollIn' } });
