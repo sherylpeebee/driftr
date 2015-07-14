@@ -7,4 +7,7 @@ angular.module('GriftrApp')
     console.log(userData);
     $rootScope.currentUser = userData;
   });
+  $scope.goToProfile = function() {
+    console.log($rootScope.currentUser);
+  }
 });

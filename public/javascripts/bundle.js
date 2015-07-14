@@ -23,7 +23,6 @@ angular.module('GriftrApp')
   .state('info.owner', {url: '/owner', templateUrl: '/templates/owner.html', controller: "InfoCtrl"})
   .state('info.traveller', {url: '/traveller', templateUrl: '/templates/traveller.html', controller: "InfoCtrl"})
   .state('ownerProfile', {url: '/ownerProfile', templateUrl: '/templates/ownerProfile.html', controller: "ProfileCtrl"});
-
 })
 .constant('urls',{
   'apiUrl': ''
@@ -203,6 +202,9 @@ angular.module('GriftrApp')
     console.log(userData);
     $rootScope.currentUser = userData;
   });
+  $scope.goToProfile = function() {
+    console.log($rootScope.currentUser);
+  }
 });
 
 angular.module('GriftrApp')

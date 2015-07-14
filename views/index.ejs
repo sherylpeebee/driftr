@@ -18,8 +18,9 @@
 
     <div class="nav-wrapper container"><a id="logo-container" ui-sref="home" class="brand-logo">Griftr</a>
       <ul class="right hide-on-med-and-down">
+        <li><a ui-sref='listings'>Listings</a></li>
         <% if (user) { %>
-          <li>{{currentUser.twitter.displayName}}</li>
+          <li><a target="_self" ng-click="goToProfile()">{{currentUser.twitter.displayName}}</a></li>
           <li><a target="_self" href="/auth/logout" class="glyphicon glyphicon-home">&nbsp;Logout</a></li>
         <% } else { %>
           <li><a target="_self" href="/auth/twitter" class="glyphicon glyphicon-home">&nbsp;Login</a></li>
